@@ -10,7 +10,13 @@ Vue.use(VueRouter)
     component: ()=>import("../views/front/Index")
   },
 
- 
+    {
+      path: '/posts',
+      name: 'Posts',
+      component: ()=>import("../views/front/PostList")
+    },
+
+
 ]
 
 const router = new VueRouter({
