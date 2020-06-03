@@ -17,6 +17,13 @@ Vue.use(VueRouter)
     },
 
 
+    {
+      path: '/posts/:id',
+      name: 'Post',
+      component: ()=>import("../views/front/PostDetail")
+    },
+
+
 ]
 
 const router = new VueRouter({
