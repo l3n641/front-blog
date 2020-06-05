@@ -13,22 +13,22 @@
                                     <div class="content-background" >
                                         <el-row class="article-header">
                                             <header >
-                                                <el-col  span="16"  offset="6" >
-                                                    <h1 class="article-title">php如何判断一个日期的格式是否正确</h1>
+                                                <el-col   :offset="6" >
+                                                    <h1 class="article-title">{{post_data.title}}</h1>
                                                 </el-col>
                                                 <el-col>
                                                     <el-row  class="article-meta">
                                                         <div class="article-meta">
-                                                            <el-col span="5" offset="3">
-                                                                <time > <i class="el-icon-time"></i> 2016-1-4 10:29:39</time>
+                                                            <el-col :span="5" :offset="3">
+                                                                <time > <i class="el-icon-time"></i> {{post_data.create_time}}</time>
                                                             </el-col>
-                                                            <el-col span="3"  offset="1" clss="post-type">
+                                                            <el-col :span="3"  :offset="1" class="post-type">
                                                                 <i class="el-icon-s-order"></i><a href="program" title="" draggable="false">后端程序</a>
                                                             </el-col>
-                                                            <el-col span="3" offset="1" class="article-meta-views" >
-                                                                <i class="el-icon-reading"></i> 共120人围观
+                                                            <el-col :span="3" :offset="1" class="article-meta-views" >
+                                                                <i class="el-icon-reading"></i> 共{{post_data.post_views}}人围观
                                                             </el-col>
-                                                            <el-col span="3" offset="1" class="item article-meta-comment" >
+                                                            <el-col :span="3" :offset="1" class="item article-meta-comment" >
                                                                  <i class="glyphicon glyphicon-comment"></i> 0个不明物体
                                                             </el-col>
                                                         </div>
@@ -39,12 +39,11 @@
 
                                         <el-row >
                                             <article class="article" >
-                                                <el-col offset="1" >11222211</el-col>
+                                                <el-col :offset="1" ><div v-html="post_data.content"></div></el-col>
                                             </article>
                                             <el-col   class="tags">
                                                 <div class="article-tags">标签：
-                                                    <a href="" rel="tag" class="tag" >PHP</a>
-                                                    <a href="" rel="tag" class="tag" >PHP</a>
+                                                    <a href="" rel="tag" class="tag" v-for="tag in post_data.tags" :key="tag.id"  >{{tag.name}}</a>
                                                 </div>
                                             </el-col>
                                         </el-row>
@@ -71,19 +70,26 @@
 <script>
     import Header from "@/components/Header.vue"
     import Aside from "@/components/Aside.vue"
+    import {get_post_details} from "@/api/posts.js"
 
     export default {
         components: { Header ,Aside},
         data() {
             return {
                 activeIndex: '1',
-                activeIndex2: '1'
+                activeIndex2: '1',
+                post_data:{}
             };
         },
         methods: {
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             }
+        },
+        mounted() {
+            get_post_details(this.$route.params.id).then((response)=>{
+                this.post_data=response
+            })
         }
     }
 </script>

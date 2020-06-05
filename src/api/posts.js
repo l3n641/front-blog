@@ -8,3 +8,9 @@ export function get_posts(type=null,order_field=1){
     })
 }
 
+export function get_post_details(id){
+    return request(
+        { url:"posts/"+id, method: "GET"}
+    )
+}
+
