@@ -6,11 +6,15 @@
 
                     <el-row>
                         <header >
-                            <el-col :span="3" v-if="visible_title"><a  href="program" style="" ><i>后端程序</i></a></el-col>
-                            <el-col :span="16" >
-                                <p><router-link :to="{path:'/posts/'+post_data.id}">
-                                    {{post_data&& post_data.title}}
-                                </router-link> </p>
+                            <el-col :span="3" v-if="visible_title">
+                                <router-link class="post_type" :to="{path:'/posts/'+post_data.id}">
+                                    后端程序
+                                </router-link>
+                            </el-col>
+                            <el-col :span="16"  class="title">
+                                    <router-link style="color: #4A9FF9"  :to="{path:'/posts/'+post_data.id}">
+                                        {{post_data&& post_data.title}}
+                                </router-link>
                             </el-col>
 
                         </header>
@@ -36,7 +40,7 @@
                     </p>
                     </el-row>
                     <el-row>
-                        <div  class="note" v-if="visible_content" v-html="post_data.content.substring(0,200)"></div>
+                        <div  class="note" v-if="visible_content" v-html="post_data.content.substring(0,300)"></div>
                     </el-row>
 
 
@@ -72,11 +76,21 @@
 </script>
 
 <style scoped>
+
+ .title{
+     font-size: 24px;
+     padding-top: 0.5em;
+     margin-top: 0.5em;
+ }
  .header{
      font-size: 9em;
  }
   .meta{
       font-size: 12px;
+  }
+  .post_type{
+      font-size: 13px;
+      color: #2ac06d;
   }
 
  a{

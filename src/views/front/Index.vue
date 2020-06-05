@@ -8,7 +8,8 @@
                     <el-row :gutter="20">
                         <el-col :span="21" :offset="3" >
                             <IndexCarousel></IndexCarousel>
-                            <div class="new_line">最新发布:</div>
+
+                            <div class="new_line"><el-link type="danger">最新发布:</el-link></div>
                             <div class="content-background" >
                                 <el-row v-for="data in post_datas" :key="data.id">
                                     <el-col class="post_list">
@@ -82,7 +83,7 @@ float:right
 
     .new_line {
         background-color: #FFFFFF;
-        margin-top: 1em;
+        margin-top: 0.5em;
         padding: 0.5em;
 
     }
