@@ -10,9 +10,10 @@
                             <IndexCarousel></IndexCarousel>
                             <div class="new_line">最新发布:</div>
                             <div class="content-background" >
-                                <el-row >
-                                    <el-col class="post_list"><Post></Post></el-col>
-                                    <el-col class="post_list"><Post ></Post></el-col>
+                                <el-row v-for="data in post_datas" :key="data.id">
+                                    <el-col class="post_list">
+                                        <Post :post_data = " data "></Post>
+                                    </el-col>
                                 </el-row>
                             </div>
                         </el-col>
@@ -24,7 +25,7 @@
             <Aside></Aside>
 
         </el-container>
-        <el-footer class=" flex: 0 0 auto;">
+        <el-footer >
             fg
         </el-footer>
 
@@ -36,20 +37,27 @@
     import IndexCarousel from "@/components/IndexCarousel.vue"
     import Post from "@/components/Post.vue"
     import Aside from "@/components/Aside.vue"
+    import {get_posts} from "@/api/posts.js"
 
     export default {
         components: { Header,IndexCarousel ,Post,Aside},
         data() {
             return {
                 activeIndex: '1',
-                activeIndex2: '1'
+                activeIndex2: '1',
+                post_datas:[],
             };
         },
         methods: {
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             }
-        }
+        },
+         mounted() {
+            get_posts().then((response)=>{
+               this.post_datas= this.post_datas.concat( response.data)
+            })
+    }
     }
 </script>
 .top-nav{
